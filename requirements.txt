@@ -1,0 +1,4 @@
+Events==0.4
+requests==2.28.1
+setuptools==63.2.0
+signalrcore==0.9.5
