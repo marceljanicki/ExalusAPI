@@ -6,7 +6,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name = "PyExalus",
+    name = "pyexalus",
     version = "0.1",
     author = "Marcel Janicki",
     description = "A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.",
@@ -16,5 +16,6 @@ setup(
     packages = find_packages(),
     python_requires = ">=3.10.6",
     install_requires = ["requests", "events", "signalrcore"],
-    keywords = "exalus",
+    keywords = "exalus, home assistant, client",
+    url = "https://github.com/marceljanicki/PyExalus"
 )

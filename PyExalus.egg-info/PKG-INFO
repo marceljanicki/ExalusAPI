@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: pyexalus
+Version: 0.1
+Summary: A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.
+Home-page: https://github.com/marceljanicki/PyExalus
+Author: Marcel Janicki
+License: Apache License 2.0
+Keywords: exalus,home assistant,client
+Requires-Python: >=3.10.6
+Description-Content-Type: text/markdown
+
+# PyExalus
+
+A simple wrapper for [Exalus Home](https://www.tr7.pl/), created specifically for [HomeAssistant](https://www.home-assistant.io/) integration.
+
