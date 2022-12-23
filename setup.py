@@ -9,7 +9,7 @@ setup(
     name = "PyExalus",
     version = "0.1",
     author = "Marcel Janicki",
-    description = "Tiny module to communicate with Exalus controller",
+    description = "A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.",
     long_description=README,
     long_description_content_type="text/markdown",
     license = "Apache License 2.0",
