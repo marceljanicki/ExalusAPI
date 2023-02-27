@@ -1,16 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "PyExalus"
-version = "0.2.1"
-authors = [
-  { name="Marcel Janicki", email="marcelzamel@gmail.com" },
-]
-description = "A simple wrapper for Exalus Home, created specifically for HomeAssistant integration."
+name = "pyexalus"
+version = "0.1"
+description = "Simple Exalus integration wrapper, created specifically for HomeAssistant integration."
 readme = "README.md"
-requires-python = ">=3.10.6"
+authors = [{ name = "Marcel Janicki", email = "majanicki00@gmail.com" }]
+license = { file = "LICENSE" }
 classifiers = [
+    "License :: OSI Approved :: Apache-2.0",
+    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: Apache License 2.0",
-    "Operating System :: OS Independent",
 ]
+keywords = ["HomeAssistant", "Exalus"]
+dependencies = ["events",
+    "signalrcore",
+    "requests",
+]
+requires-python = ">=3.10.6"
 [project.urls]
-"Homepage" = "https://github.com/marceljanicki/PyExalus"
+Homepage = "https://github.com/marceljanicki/PyExalus"
+[tool.bumpver]
+current_version = "2023.1001-alpha"
+version_pattern = "YYYY.BUILD[-TAG]"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'current_version = "{version}"',
+]
+"README.md" = [
+    "{version}",
+    "{pep440_version}",
+]
+
