@@ -1,13 +1,19 @@
 Metadata-Version: 2.1
-Name: pyexalus
-Version: 0.1
+Name: PyExalus
+Version: 0.2.1
 Summary: A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.
 Home-page: https://github.com/marceljanicki/PyExalus
 Author: Marcel Janicki
+Author-email: Marcel Janicki <marcelzamel@gmail.com>
 License: Apache License 2.0
+Project-URL: Homepage, https://github.com/marceljanicki/PyExalus
 Keywords: exalus,home assistant,client
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache License 2.0
+Classifier: Operating System :: OS Independent
 Requires-Python: >=3.10.6
 Description-Content-Type: text/markdown
+License-File: LICENSE
 
 # PyExalus
 

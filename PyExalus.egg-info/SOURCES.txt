@@ -1,4 +1,6 @@
+LICENSE
 README.md
+pyproject.toml
 setup.cfg
 setup.py
 PyExalus.egg-info/PKG-INFO
@@ -12,5 +14,3 @@ pyexalus.egg-info/dependency_links.txt
 pyexalus.egg-info/requires.txt
 pyexalus.egg-info/top_level.txt
 src/__init__.py
-src/main.py
-src/test.py

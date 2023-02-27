@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name = "pyexalus",
-    version = "0.1",
+    version = "0.2.1",
     author = "Marcel Janicki",
     description = "A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.",
     long_description=README,
