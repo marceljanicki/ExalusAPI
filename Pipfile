@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+certifi = "==2022.12.7"
+charset-normalizer = "==2.1.1"
+events = "==0.4"
+idna = "==3.4"
+msgpack = "==1.0.2"
+requests = "==2.28.1"
+signalrcore = "==0.9.5"
+urllib3 = "==1.26.14"
+websocket-client = "==1.0.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.1"

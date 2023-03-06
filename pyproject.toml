@@ -19,7 +19,7 @@ dependencies = ["events",
     "signalrcore",
     "requests",
 ]
-requires-python = ">=3.10.6"
+requires-python = ">=3.11.1"
 [project.urls]
 Homepage = "https://github.com/marceljanicki/PyExalus"
 [tool.bumpver]
