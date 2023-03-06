@@ -51,7 +51,7 @@ class Status(Enum):
     UserNotLoggedIn = 13
 
 
-class Pyexalus:
+class Controller:
     def __init__(self, controller_serial, controller_pin, login, password):
 
         self.controller_serial: str = controller_serial
