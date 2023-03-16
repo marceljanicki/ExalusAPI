@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: exalusAPI
-Version: 0.3.3
+Version: 0.4.1
 Summary: Simple Exalus integration wrapper, created specifically for HomeAssistant integration.
 Author-email: Marcel Janicki <majanicki00@gmail.com>
 License:                                  Apache License
@@ -214,7 +214,7 @@ Requires-Python: >=3.10.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-# PyExalus
+# exalusAPI
 
 A simple wrapper for [Exalus Home](https://www.tr7.pl/), created specifically for [HomeAssistant](https://www.home-assistant.io/) integration.
 
