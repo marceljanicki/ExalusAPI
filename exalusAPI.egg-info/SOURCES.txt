@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+exalusAPI.egg-info/PKG-INFO
+exalusAPI.egg-info/SOURCES.txt
+exalusAPI.egg-info/dependency_links.txt
+exalusAPI.egg-info/requires.txt
+exalusAPI.egg-info/top_level.txt
+src/__init__.py
