@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exalusAPI"
-version = "0.5.1"
+version = "0.5.2"
 description = "Simple Exalus integration wrapper, created specifically for HomeAssistant integration."
 readme = "README.md"
 authors = [{ name = "Marcel Janicki", email = "majanicki00@gmail.com" }]
@@ -16,6 +16,7 @@ classifiers = [
 ]
 keywords = ["HomeAssistant", "Exalus"]
 requires-python = ">=3.10.6"
+dependencies = ["requests", "signalrcore"]
 [project.urls]
 Homepage = "https://github.com/marceljanicki/exalusAPI"
 [tool.bumpver]

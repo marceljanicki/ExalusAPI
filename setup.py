@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name = "ExalusAPI",
-    version = "0.5.1",
+    version = "0.5.2",
     author = "Marcel Janicki",
     description = "A simple wrapper for Exalus Home, created specifically for HomeAssistant integration.",
     long_description=README,
@@ -15,7 +15,6 @@ setup(
     license = "Apache License 2.0",
     packages = find_packages(),
     python_requires = ">=3.10.6",
-    install_requires = ["requests", "signalrcore"],
     keywords = "exalus, home assistant, client",
     url = "https://github.com/marceljanicki/ExalusAPI"
 )

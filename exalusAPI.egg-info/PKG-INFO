@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: exalusAPI
-Version: 0.5.1
+Version: 0.5.2
 Summary: Simple Exalus integration wrapper, created specifically for HomeAssistant integration.
 Home-page: https://github.com/marceljanicki/ExalusAPI
 Author: Marcel Janicki
