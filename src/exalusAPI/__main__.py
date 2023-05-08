@@ -1,12 +1,16 @@
-import asyncio, logging, uuid, requests, time
-import dataclasses
-import json
+"""Exalus API"""
+
+from typing import Any
+from enum import Enum
+import asyncio
+import logging
+import uuid
+import requests
 import events
 
 from json import dumps, loads
 from dataclasses import dataclass, asdict
-from typing import Any
-from enum import Enum
+
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 
 SERVER_BROKER_URL: str = "http://broker.tr7.pl"
@@ -78,7 +82,16 @@ class ExalusAPIClient:
             print(i + 1, self.devices_list[i])
 
     def data_parser(self, resp, event):
-        obj = json.loads(resp[1])
+        """_summary_
+
+        Args:
+            resp (_type_): _description_
+            event (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        obj = loads(resp[1])
         tid = obj["TransactionId"]
         df = DataFrame(
             obj["Resource"],
@@ -92,18 +105,28 @@ class ExalusAPIClient:
         print(obj)
         return obj
 
-    async def process_data(event):
+    async def process_data(self, event):
+        """_summary_
+
+        Args:
+            event (_type_): _description_
+        """
         try:
             async with asyncio.wait(10):
                 await event.wait()
         except asyncio.TimeoutError():
             print("Timeout!")
             return
-        df = event.df
-        tid = event.tid
+        #df = event.df
+        #tid = event.tid
         event.clear()
 
     async def authorize_async(self, auth_result):
+        """_summary_
+
+        Args:
+            auth_result (_type_): _description_
+        """
         if auth_result:
             login_frame = DataFrame(
                 "/users/user/login",
@@ -117,6 +140,11 @@ class ExalusAPIClient:
             print("Authorization falied!")
 
     def authorize(self, auth_result):
+        """_summary_
+
+        Args:
+            auth_result (_type_): _description_
+        """
         asyncio.run(self.authorize_async(auth_result))
 
     def data_handler(self, data: list) -> None:
@@ -179,7 +207,12 @@ class ExalusAPIClient:
             self.hub_connection.start()
 
     async def send_and_wait(self, sent_frame: DataFrame, ms_timeout=5000):
-        """"""
+        """_summary_
+
+        Args:
+            sent_frame (DataFrame): _description_
+            ms_timeout (int, optional): _description_. Defaults to 5000.
+        """
         ack_event = asyncio.Event()
 
         event = None
@@ -194,7 +227,7 @@ class ExalusAPIClient:
 
         self.hub_connection.on("Data", ack_received)
         self.hub_connection.send(
-            "SendTo", [self.controller_serial, dataclasses.asdict(sent_frame)]
+            "SendTo", [self.controller_serial, asdict(sent_frame)]
         )
 
         try:
@@ -204,6 +237,8 @@ class ExalusAPIClient:
             print("Timeout error!")
 
     def start(self):
+        """_summary_
+        """
         self.hub_connection.send(
             "AuthorizeTo", [self.controller_serial, self.controller_pin]
         )
