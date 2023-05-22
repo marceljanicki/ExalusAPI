@@ -17,10 +17,8 @@ SERVER_BROKER_URL: str = "http://broker.tr7.pl"
 
 _LOGGER = logging.getLogger(__name__)
 
-
-# Frame declaration
 @dataclass
-class DataFrame:
+class DataFrame: #DataFrame class to communicate with the controller
     Resource: str
     Status: Enum
     Method: Enum
@@ -28,7 +26,7 @@ class DataFrame:
     Data: Any
 
 
-class Method(Enum):
+class Method(Enum): #Method class created to be injected in dataframes
     Get = 0
     Post = 1
     Delete = 2
@@ -37,7 +35,7 @@ class Method(Enum):
     Head = 5
 
 
-class Status(Enum):
+class Status(Enum): #Status class created to be injected in dataframes
     OK = 0
     UnknownError = 1
     FatalError = 2
@@ -54,14 +52,12 @@ class Status(Enum):
     UserNotLoggedIn = 13
 
 
-class DataFrameEvent(asyncio.Event):
-    def __init__(self, dataframe, transaction_id):
-        super().__init__()
-        self.df = dataframe
-        self.tid = transaction_id
-
-
 class ExalusAPIClient:
+    
+    """
+    Main API class
+    _summary_
+    """
     def __init__(self, controller_serial, controller_pin, login, password):
         self.controller_serial: str = controller_serial
         self.controller_pin: str = controller_pin
@@ -73,15 +69,7 @@ class ExalusAPIClient:
         self.last_response = None
         self.devices_list = None
 
-    async def wait_for_authorization(self):
-        while not self.is_authorized:
-            await asyncio.sleep(0.1)
-
-    def handle_devices_list(self):
-        for i in range(len(self.devices_list)):
-            print(i + 1, self.devices_list[i])
-
-    def data_parser(self, resp, event):
+    def data_parser(self, resp):
         """_summary_
 
         Args:
@@ -92,17 +80,6 @@ class ExalusAPIClient:
             _type_: _description_
         """
         obj = loads(resp[1])
-        tid = obj["TransactionId"]
-        df = DataFrame(
-            obj["Resource"],
-            obj["Status"],
-            obj["Method"],
-            obj["TransactionId"],
-            obj["Data"],
-        )
-        event = DataFrameEvent(df, tid)
-        event.set()
-        print(obj)
         return obj
 
     async def process_data(self, event):
@@ -117,8 +94,6 @@ class ExalusAPIClient:
         except asyncio.TimeoutError():
             print("Timeout!")
             return
-        #df = event.df
-        #tid = event.tid
         event.clear()
 
     async def authorize_async(self, auth_result):
@@ -146,24 +121,7 @@ class ExalusAPIClient:
             auth_result (_type_): _description_
         """
         asyncio.run(self.authorize_async(auth_result))
-
-    def data_handler(self, data: list) -> None:
-        """Handle incoming data"""
-
-        self.last_response = loads(data[1])
-
-        if self.last_response["Resource"] != "/homemessaging/notify/message/new":
-            print(
-                "Sent by: %s data:\n %s", data[0], {dumps(self.last_response, indent=3)}
-            )
-            if self.last_response["Resource"] == "/users/user/login":
-                self.is_authorized = True
-                print("User has been authorized!")
-
-            if self.last_response["Resource"] == "/devices/list":
-                self.devices_list = self.last_response["Data"]
-                self.handle_devices_list()
-
+                
     def establish_connection(self) -> None:
         """Main function used for connecting with controller and handle callbacks"""
 
@@ -197,12 +155,10 @@ class ExalusAPIClient:
                 .build()
             )
 
-            event = None
-
             self.hub_connection.on("SendError", print)
             self.hub_connection.on("Authorization", self.authorize)
             self.hub_connection.on("Registration", print)
-            self.hub_connection.on("Data", lambda data: self.data_parser(data, event))
+            self.hub_connection.on("Data", lambda data: self.data_parser(data))
             self.hub_connection.on_open(self.start)
             self.hub_connection.start()
 
@@ -215,12 +171,10 @@ class ExalusAPIClient:
         """
         ack_event = asyncio.Event()
 
-        event = None
-
         print("Sent frame", sent_frame)
 
         def ack_received(response):
-            recieved_frame = self.data_parser(response, event)
+            recieved_frame = self.data_parser(response)
             print(recieved_frame["TransactionId"], sent_frame.TransactionId)
             if recieved_frame["TransactionId"] == sent_frame.TransactionId:
                 ack_event.set()
